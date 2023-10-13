@@ -1,10 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:test_project/pages/first_page.dart';
-import 'package:test_project/pages/home_page.dart';
-import 'package:test_project/pages/second_page.dart';
-import 'package:test_project/pages/setting_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,15 +10,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: FirstPage(),
-      routes: {
-        '/firstpage':(context) => FirstPage(),
-        '/secondpage':(context) => SecondPage(),
-        '/homepage':(context) => HomePage(),
-        '/settingpage':(context) => SettingPage(),
-      },
+      // routes: {
+      //   '/firstpage':(context) => FirstPage(),
+      //   '/secondpage':(context) => ProfilePage(),
+      //   '/homepage':(context) => HomePage(),
+      //   '/settingpage':(context) => SettingPage(),
+      // },
     );
   }
 }

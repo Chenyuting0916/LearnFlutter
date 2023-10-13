@@ -1,49 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:test_project/pages/second_page.dart';
+import 'package:test_project/pages/home_page.dart';
+import 'package:test_project/pages/profile_page.dart';
+import 'package:test_project/pages/setting_Page.dart';
 
-class FirstPage extends StatelessWidget {
+class FirstPage extends StatefulWidget {
   const FirstPage({super.key});
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  int _selectedIndex = 0;
+
+  final List _pages = [
+    //home
+    const HomePage(),
+    //profile
+    const ProfilePage(),
+    //settings
+    const SettingPage()
+  ];
+
+  void _navigateBottomBar(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("first page"),
-      ),
-      drawer:  Drawer(
-        backgroundColor: Colors.amberAccent,
-        child: Column(
-          children: [
-            const DrawerHeader(child: Icon(Icons.abc_outlined, size: 48)),
-            ListTile(
-              leading: const Icon(Icons.ac_unit_outlined),
-              title: const Text("Home"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/homepage');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.ac_unit_outlined),
-              title: const Text("Second Page"),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/secondpage');
-              },
-            ),
-            ],
-        ),
-      ),
-      body: Center(
-          child: ElevatedButton(
-        child: const Text("toSecond Page"),
-        onPressed: () {
-          // to second page
-          // Navigator.push(
-          //     context, MaterialPageRoute(builder: (context) => const SecondPage()));
-          Navigator.pushNamed(context, '/secondpage');
-        },
-      )),
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: _navigateBottomBar,
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.settings), label: 'setting'),
+          ]),
+      body: _pages[_selectedIndex],
     );
   }
 }
